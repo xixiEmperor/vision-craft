@@ -1,3 +1,5 @@
+import type { ComponentNode, ContainerNode } from "./basic";
+
 // 组件类型枚举
 export type ComponentType = 
   | 'Text' 
@@ -70,4 +72,19 @@ export interface BaseChartComponent extends BaseComponentNode {
     showLegend: boolean;
     tooltipEnabled: boolean;
   };
+}
+
+/**
+ * renderer对所有组件传入的props类型
+ */
+export interface RendererProps {
+  node: ComponentNode;
+}
+
+/**
+ * renderer对容器组件传入的props类型
+ */
+export interface ContainerRendererProps extends RendererProps {
+  node: ContainerNode;
+  renderChildren: (children: ComponentNode[]) => React.ReactNode;
 }

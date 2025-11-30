@@ -1,11 +1,5 @@
 import type { BaseComponentNode } from "./types";
 
-// 所有可能的组件类型集合
-export type ComponentNode = 
-	| TextComponent
-  | ContainerNode;
-
-
 /**
  * 文字组件
  */
@@ -33,4 +27,9 @@ export interface ContainerNode extends BaseComponentNode {
   // 核心关系定义：递归结构
   children?: ComponentNode[]; 
 }
+
+// 所有可能的组件类型集合
+export type ComponentNode = 
+	| TextComponent
+  | ContainerNode;
 
