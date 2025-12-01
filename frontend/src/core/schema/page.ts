@@ -19,5 +19,5 @@ export interface PageDSL {
 
   // 组件树 (核心)
   // 这里的 children 就是第一层级的组件
-  components?: ComponentNode[]; 
+  children?: ComponentNode[]; 
 }

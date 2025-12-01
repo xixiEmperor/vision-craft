@@ -1,4 +1,4 @@
-import type { ComponentNode, ContainerNode } from "./basic";
+import type { ComponentNode, ContainerComponent } from "./basic";
 
 // 组件类型枚举
 export type ComponentType = 
@@ -24,8 +24,8 @@ export interface BaseComponentNode {
   // 样式属性 (CSS + 布局)
   style?: {
     // 基础定位与尺寸 (大屏强依赖绝对定位)
-    left: number; // 左偏移
-    top: number; // 上偏移
+    x: number; // 左偏移
+    y: number; // 上偏移
     width: number; // 宽度
     height: number; // 高度
     zIndex: number; // 层级
@@ -85,6 +85,6 @@ export interface RendererProps {
  * renderer对容器组件传入的props类型
  */
 export interface ContainerRendererProps extends RendererProps {
-  node: ContainerNode;
+  node: ContainerComponent;
   renderChildren: (children: ComponentNode[]) => React.ReactNode;
 }

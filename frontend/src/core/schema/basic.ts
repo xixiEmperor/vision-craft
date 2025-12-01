@@ -18,7 +18,7 @@ export interface TextComponent extends BaseComponentNode {
  * 容器组件
  * 核心：拥有 children 属性
  */
-export interface ContainerNode extends BaseComponentNode {
+export interface ContainerComponent extends BaseComponentNode {
   type: 'Container';
   props: {
     layoutMode: 'absolute' | 'flex'; // 布局模式：自由拖拽 vs 自动排列
@@ -31,5 +31,5 @@ export interface ContainerNode extends BaseComponentNode {
 // 所有可能的组件类型集合
 export type ComponentNode = 
 	| TextComponent
-  | ContainerNode;
+  | ContainerComponent;
 
