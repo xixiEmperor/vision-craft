@@ -3,6 +3,7 @@ import type { ComponentType } from "@/core/schema/types";
 import type { ComponentNode } from "@/core/schema/basic";
 import Container from "./basic/Container";
 import Text from "./basic/Text";
+import type { PageDSL } from "@/core/schema/page";
 
 /**
  * 组件注册表类
@@ -11,14 +12,14 @@ import Text from "./basic/Text";
  */
 // 每个注册组件都约定接收 renderer 传入的节点数据和可选的 renderChildren 回调
 type RegistryComponent = (props: {
-  node: ComponentNode;
+  node: ComponentNode | PageDSL;
   renderChildren?: (children: ComponentNode[]) => React.ReactNode;
 }) => React.ReactNode;
 
 // 自定义 Map 类型，让 get 在类型层面**一定**返回一个可用于 JSX 的组件（避免 Renderer 中出现 undefined 报错）
 interface ComponentRegistry
-  extends Map<ComponentType | "error-callback", RegistryComponent> {
-  get(key: ComponentType | "error-callback"): RegistryComponent;
+  extends Map<ComponentType | "error-callback" | "RootContainer", RegistryComponent> {
+  get(key: ComponentType | "error-callback" | "RootContainer"): RegistryComponent;
 }
 
 /**
@@ -33,7 +34,7 @@ class ComponentRegistryManager {
    * @param type 组件类型
    * @param component 组件函数
    */
-  static register(type: ComponentType | "error-callback", component: RegistryComponent): void {
+  static register(type: ComponentType | "error-callback" | "RootContainer", component: RegistryComponent): void {
     this.registry.set(type, component);
   }
 
@@ -42,7 +43,7 @@ class ComponentRegistryManager {
    * @param type 组件类型
    * @returns 组件函数
    */
-  static get(type: ComponentType | "error-callback"): RegistryComponent {
+  static get(type: ComponentType | "error-callback" | "RootContainer"): RegistryComponent {
     return this.registry.get(type);
   }
 
@@ -61,22 +62,13 @@ class ComponentRegistryManager {
   static size(): number {
     return this.registry.size;
   }
-
-  /**
-   * 批量注册组件
-   * @param components 组件映射对象
-   */
-  static registerBatch(components: Record<ComponentType | "error-callback", RegistryComponent>): void {
-    Object.entries(components).forEach(([type, component]) => {
-      this.registry.set(type as ComponentType | "error-callback", component);
-    });
-  }
 }
 
 // 预注册基础容器组件，键为 Schema 中的 type 字段
 // 这里通过类型断言把具体组件适配到统一的 RegistryComponent 约定
 ComponentRegistryManager.register("Container", Container as unknown as RegistryComponent);
 ComponentRegistryManager.register("Text", Text as unknown as RegistryComponent);
+ComponentRegistryManager.register("RootContainer", Container as unknown as RegistryComponent); // 根容器组件是一个特殊的容器组件
 
 // 导出类实例和类型
 export { ComponentRegistryManager };

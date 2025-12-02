@@ -1,11 +1,17 @@
 import { componentRegistry } from "@/components/materials/registry"
 import type { ComponentNode } from "../schema/basic"
+import type { PageDSL } from "../schema/page"
+
+interface RendererProps {
+	// schema 可以是单个组件，也可以是组件数组，或者是整个页面schema
+    schema: ComponentNode | ComponentNode[] | PageDSL;
+};
 
 /**
  * 渲染器，递归渲染组件树
  * @param schema 组件的schema
  */
-export default function Renderer ({ schema }: { schema: ComponentNode | ComponentNode[] }): React.ReactNode {
+export default function Renderer ({ schema }: RendererProps): React.ReactNode {
 	// 如果scheme是一个数组，说明传入了children，遍历children渲染
 	if (Array.isArray(schema)) {
 		return schema.map(node => <Renderer key={node.id} schema={node} />)

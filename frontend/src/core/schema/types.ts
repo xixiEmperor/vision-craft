@@ -1,4 +1,5 @@
 import type { ComponentNode, ContainerComponent } from "./basic";
+import type { PageDSL } from "./page";
 
 // 组件类型枚举
 export type ComponentType = 
@@ -78,13 +79,13 @@ export interface BaseChartComponent extends BaseComponentNode {
  * renderer对所有组件传入的props类型
  */
 export interface RendererProps {
-  node: ComponentNode;
+  node: ComponentNode | PageDSL;
 }
 
 /**
  * renderer对容器组件传入的props类型
  */
 export interface ContainerRendererProps extends RendererProps {
-  node: ContainerComponent;
+  node: ContainerComponent | PageDSL;
   renderChildren: (children: ComponentNode[]) => React.ReactNode;
 }

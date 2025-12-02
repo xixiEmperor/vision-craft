@@ -20,7 +20,7 @@ export interface TextComponent extends BaseComponentNode {
  */
 export interface ContainerComponent extends BaseComponentNode {
   type: 'Container';
-  props: {
+  props?: {
     layoutMode: 'absolute' | 'flex'; // 布局模式：自由拖拽 vs 自动排列
     gap?: number;                    // flex 模式下的间距
   };
