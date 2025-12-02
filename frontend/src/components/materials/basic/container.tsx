@@ -1,4 +1,5 @@
 import type { ContainerRendererProps } from "@/core/schema/types"
+import DndWrapper from "@/core/dnd/DndWrapper"
 
 /**
  * 容器组件
@@ -8,8 +9,10 @@ import type { ContainerRendererProps } from "@/core/schema/types"
  */
 export default function Container({ node, renderChildren }: ContainerRendererProps) {
 	return (
-		<div className="relative">
-			{renderChildren(node.children!)}
-		</div>
+		<DndWrapper>
+			<div className="relative">
+				{renderChildren(node.children!)}
+			</div>
+		</DndWrapper>
 	)
 }

@@ -1,5 +1,6 @@
 import SidebarMenu from "@/panels/component-panel/SidebarMenu"
-import { DndContext } from "@dnd-kit/core"
+import DndWrapper from "@/core/dnd/DndWrapper"
+import DroppableItem from "@/core/dnd/DroppableItem"
 
 export default function Index() {
   return (
@@ -7,12 +8,14 @@ export default function Index() {
       <div className="row-start-1 row-end-2 col-start-1 col-end-4 border border-red-500">
         此处应为头部工具栏
       </div>
-      <DndContext>
+      <DndWrapper>
         <SidebarMenu className="border border-blue-500"/>
-        <div className="border border-green-500">
-          此处应为组件放置的画布区域
-        </div>
-      </DndContext>
+        <DroppableItem id="page">
+          <div className="border border-green-500 h-full">
+            此处应为组件放置的画布区域
+          </div>
+        </DroppableItem>
+      </DndWrapper>
       <div className="border border-yellow-500">
         此处应为右侧属性面板
       </div>

@@ -1,28 +1,31 @@
 import type React from "react"
 import { AlignJustify, Box } from "lucide-react"
+import DraggableItem from "@/core/dnd/DraggableItem"
 
-interface componentItem {
+interface ComponentItem {
     type: string,
     name: string,
     icon: React.ReactNode
 }
 
-function PanelItem({ name, icon }: Omit<componentItem, "type">) {
+function PanelItem({ type, name, icon }: ComponentItem) {
     return (
-        <div className="w-[110px] h-[110px] flex flex-col items-center justify-evenly 
-                        border border-gray-300 cursor-grab">
-            <div>
-                {icon}
+        <DraggableItem id={ type }>
+            <div className="w-[110px] h-[110px] flex flex-col items-center justify-evenly 
+                            border border-gray-300 rounded-[5px] cursor-grab">
+                <div>
+                    {icon}
+                </div>
+                <p>
+                    {name}
+                </p>
             </div>
-            <p>
-                {name}
-            </p>
-        </div>
+        </DraggableItem>
     )
 }
 
 export default function BasicPanel() {
-    const component: componentItem[] = [
+    const component: ComponentItem[] = [
         {
             type: "text",
             name: "文字组件",
@@ -47,8 +50,7 @@ export default function BasicPanel() {
                 component.map(item => (
                     <PanelItem 
                         key={item.type} 
-                        name={item.name} 
-                        icon={item.icon}
+                        {...item}
                     />
                 ))
             }
