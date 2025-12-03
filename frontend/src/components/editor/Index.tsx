@@ -1,8 +1,9 @@
-import SidebarMenu from "@/panels/component-panel/SidebarMenu"
+import SidebarMenu from "@/components/panels/component-panel/SidebarMenu"
 import DndWrapper from "@/core/dnd/DndWrapper"
 import DroppableItem from "@/core/dnd/DroppableItem"
 import Renderer from "@/core/renderer/Renderer"
 import EmptyTemplate from "../EmptyTemplate"
+import PropertyPanel from "@/components/panels/property-panel/Index"
 import { useSchemaStore } from "@/store/schema-store"
 import { useShallow } from "zustand/shallow"
 
@@ -26,7 +27,7 @@ export default function Index() {
               </DroppableItem>
             </DndWrapper>
             <div className="border border-yellow-500">
-              此处应为右侧属性面板
+              <PropertyPanel />
             </div>
           </div>
         }

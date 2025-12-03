@@ -1,6 +1,7 @@
-import { componentRegistry } from "@/components/materials/registry"
-import type { ComponentNode } from "../schema/basic"
-import type { PageDSL } from "../schema/page"
+import { componentRegistry } from "@/components/materials/registry";
+import type { ComponentNode } from "../schema/basic";
+import type { PageDSL } from "../schema/page";
+import RndItem from "../dnd/RndItem";
 
 interface RendererProps {
 	// schema 可以是单个组件，也可以是组件数组，或者是整个页面schema
@@ -17,7 +18,7 @@ export default function Renderer ({ schema }: RendererProps): React.ReactNode {
 		return schema.map(node => <Renderer key={node.id} schema={node} />)
 	}
 
-	if (!schema.type || !schema) {
+	if (!schema) {
 		return null
 	}
 
@@ -28,9 +29,23 @@ export default function Renderer ({ schema }: RendererProps): React.ReactNode {
   // 实现了 "控制反转"，容器不需要知道子节点具体是什么类型
 	const renderChildren = (children: ComponentNode[]) => <Renderer schema={children} />
 
-	// 通过注册表中取出的渲染函数来渲染当前节点
-	return renderComponent({
-		node: schema,
-		renderChildren
-	})
+	// 根容器占满画布本身，不参与 Rnd 拖拽
+	if ((schema as PageDSL).type === "RootContainer") {
+		return renderComponent({
+			node: schema,
+			renderChildren
+		})
+	}
+
+	const node = schema as ComponentNode;
+
+	// 普通组件统一通过 RndItem 包裹，使其在画布内可拖拽 / 缩放
+	return (
+		<RndItem node={node}>
+			{renderComponent({
+				node,
+				renderChildren
+			})}
+		</RndItem>
+	)
 }

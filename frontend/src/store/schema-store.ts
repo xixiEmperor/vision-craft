@@ -14,8 +14,14 @@ const { findNodeById, addNodeToParent, removeNodeById, updateNodeById } = useTre
 interface SchemaState {
     // 页面组件树
     schema: PageDSL | null;
+    // 当前选中的组件 id（用于属性面板、图层面板等联动）
+    selectedId: string | null;
+
     // 初始化页面组件树
     setSchema: () => void;
+
+    // 更新当前选中的组件 id
+    setSelectedId: (id: string | null) => void;
 
     // 查找节点
     findItem: (id: string, componentNode: ComponentNode | PageDSL)=> ComponentNode | PageDSL | null,
@@ -54,11 +60,20 @@ export const useSchemaStore = create<SchemaState>()(
     immer((set, get) => ({
         // 页面组件树
         schema: null,
+        // 当前选中的组件 id，初始为空
+        selectedId: null,
 
         // 初始化页面组件树
         setSchema: () => {
             set((state) => {
                 state.schema = defaultSchema;
+            });
+        },
+
+        // 更新当前选中的组件 id
+        setSelectedId: (id: string | null) => {
+            set((state) => {
+                state.selectedId = id;
             });
         },
 

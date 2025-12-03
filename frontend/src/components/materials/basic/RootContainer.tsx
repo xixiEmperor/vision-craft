@@ -11,12 +11,15 @@ import type { PageDSL } from "@/core/schema/page";
  */
 export default function RootContainer({ node, renderChildren }: ContainerRendererProps) {
 	const pageNode = node as PageDSL;
-	let className: string = `relative w-[${pageNode.settings.width}] h-[${pageNode.settings.height}]`
-
 
 	return (
 		<DroppableItem id={node.id}>
-			<div className={className}>
+			<div style={{
+                width: pageNode.settings.width,
+                height: pageNode.settings.height,
+                backgroundColor: pageNode.settings.backgroundColor,
+                backgroundImage: pageNode.settings.backgroundImage,
+            }}>
 				{renderChildren(node.children!)}
 			</div>
 		</DroppableItem>
