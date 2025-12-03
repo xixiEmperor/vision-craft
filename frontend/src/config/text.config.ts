@@ -15,8 +15,8 @@ export const textDefaultConfig: TextComponent = {
     textAlign: 'left'
   },
   style: {
-    x: 0,
-    y: 0,
+    top: 0,
+    left: 0,
     width: 200,
     height: 30,
     zIndex: 1

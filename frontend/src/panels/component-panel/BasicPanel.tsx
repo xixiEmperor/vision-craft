@@ -27,18 +27,18 @@ function PanelItem({ type, name, icon }: ComponentItem) {
 export default function BasicPanel() {
     const component: ComponentItem[] = [
         {
-            type: "text",
+            type: "Text",
             name: "文字组件",
             icon: <AlignJustify />
         },
         {
 
-            type: "image",
+            type: "Image",
             name: "图片组件",
             icon: <AlignJustify />
         },
         {
-            type: "container",
+            type: "Container",
             name: "容器组件",
             icon: <Box />
         }

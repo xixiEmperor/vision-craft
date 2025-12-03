@@ -1,5 +1,4 @@
 import { useDraggable } from "@dnd-kit/core";
-import { nanoid } from "nanoid";
 
 interface DraggableItemProps {
     id: string;
@@ -7,12 +6,9 @@ interface DraggableItemProps {
 }
 
 export default function DraggableItem({ id, children }: DraggableItemProps) {
-    const newId = nanoid()
+    // 这里只负责注册拖拽源，id 表示「拖拽的类型或节点本身」，不在这里生成实例 id
     const { listeners, attributes, setNodeRef, transform } = useDraggable({ 
         id,
-        data: {
-            newId
-        }
     });
     
 

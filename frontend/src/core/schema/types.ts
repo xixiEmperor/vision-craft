@@ -25,8 +25,8 @@ export interface BaseComponentNode {
   // 样式属性 (CSS + 布局)
   style?: {
     // 基础定位与尺寸 (大屏强依赖绝对定位)
-    x: number; // 左偏移
-    y: number; // 上偏移
+    top: number; // 左偏移
+    left: number; // 上偏移
     width: number; // 宽度
     height: number; // 高度
     zIndex: number; // 层级
@@ -37,6 +37,7 @@ export interface BaseComponentNode {
     border?: string; // 边框样式
     borderRadius?: number; // 圆角
     // ... 其他 CSS 属性
+    [key: string]: any;
   };
   
   // 交互事件 (可选，进阶功能)

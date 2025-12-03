@@ -3,19 +3,22 @@ import { useDroppable } from "@dnd-kit/core";
 interface DroppableItemProps {
     id: string;
     children: React.ReactNode;
+    style?: React.CSSProperties;
 }
 
-export default function DroppableItem({ id, children }: DroppableItemProps) {
+export default function DroppableItem({ id, children, style }: DroppableItemProps) {
     const { setNodeRef, isOver } = useDroppable({
         id: id,
     });
 
-    const style = isOver ? { backgroundColor: 'green', opacity: 0.7 } : {};
+    const defaultStyle = isOver ? { backgroundColor: 'green', opacity: 0.7 } : {};
+    const finalStyle = { ...defaultStyle, ...style };
 
     return (
         <div
             ref={setNodeRef}
-            style={style}
+            style={finalStyle}
+            className="h-full"
         >
             {children}
         </div>

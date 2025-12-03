@@ -13,8 +13,8 @@ export const containerDefaultConfig: ContainerComponent = {
   },
   children: [],
   style: {
-    x: 0,
-    y: 0,
+    top: 0,
+    left: 0,
     width: 300,
     height: 300,
     zIndex: 1,

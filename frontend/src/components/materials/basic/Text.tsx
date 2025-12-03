@@ -3,7 +3,6 @@ import type { TextComponent } from "@/core/schema/basic";
 
 export default function Text({ node }: RendererProps) {
     const props = node.props as TextComponent['props'];
-    console.log("Text props:", props);
     return (
         <div 
             style={{
