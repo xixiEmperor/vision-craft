@@ -22,7 +22,6 @@ export default function DndWrapper({ children }: { children: React.ReactNode }) 
     const handleDragStart = (event: DragStartEvent) => {
         // TODO: 需要新增组件config，拖拽开始时，深拷贝一份拖拽组件对应config，在useDraggable中注册数据
         // 目前仅做调试输出，真正的实例 id 在拖拽结束时统一生成，保证「每次成功拖拽一个新实例就得到一个全新的 id」
-        console.log("拖拽开始", event.active.id);
         setActiveId(event.active.id as string);
     }
 
@@ -30,7 +29,6 @@ export default function DndWrapper({ children }: { children: React.ReactNode }) 
     const handleDragEnd = (event: DragEndEvent) => {
         setActiveId(null);
         // 拖拽结束时，更新组件树结构，更新组件的默认位置配置
-        console.log('拖拽结束', event)
         const dropItemId = event.over?.id;
         if (!dropItemId) return;
 

@@ -2,6 +2,7 @@ import type { ComponentType } from "@/core/schema/types";
 import type { FieldMeta } from "./common";
 import { textFieldMeta } from "./text.meta";
 import { clockFieldMeta } from "./clock.meta";
+import { barChartFieldMeta } from "./bar-chart.meta";
 
 /**
  * 组件级元数据注册表
@@ -13,8 +14,9 @@ type ComponentMetaRegistry = Partial<
 >;
 
 export const componentMetaRegistry: ComponentMetaRegistry = {
-  'Text': textFieldMeta,
-  'Clock': clockFieldMeta,
+  Text: textFieldMeta,
+  Clock: clockFieldMeta,
+  BarChart: barChartFieldMeta,
 };
 
 

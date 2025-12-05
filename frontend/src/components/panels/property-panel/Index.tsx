@@ -59,12 +59,10 @@ export default function PropertyPanel() {
     return <div>请选择画布中的组件进行配置</div>;
   }
 
-  // Text 组件：使用 form-render + 动态生成的 JSON Schema 渲染配置表单
   if (componentPropsSchema) {
-    
     return (
         <FormRender
-          className="flex flex-col justify-between items-center p-2 h-full"
+          className="flex flex-col justify-between items-center p-2 h-full overflow-y-scroll"
           form={form}
           schema={componentPropsSchema}
           footer={true}

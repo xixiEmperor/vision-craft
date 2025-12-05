@@ -26,7 +26,7 @@ export default function Index() {
                 <Renderer schema={schema} />
               </DroppableItem>
             </DndWrapper>
-            <div className="border border-yellow-500">
+            <div className="border border-yellow-500 h-full overflow-y-scroll">
               <PropertyPanel />
             </div>
           </div>

@@ -11,7 +11,7 @@ export default {
 				'14': 'repeat(14, minmax(0, 1fr))',
 				'16': 'repeat(16, minmax(0, 1fr))',
 				// 自定义复杂布局
-				'custom': '400px 1fr 250px',
+				'custom': '400px 1fr 350px',
 				'sidebar': '250px 1fr',
 			},
 			// 自定义网格行数

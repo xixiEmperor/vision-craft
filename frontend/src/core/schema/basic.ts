@@ -1,4 +1,5 @@
 import type { BaseComponentNode } from "./types";
+import type { BarChartComponent } from "./chart";
 
 /**
  * 文字组件
@@ -47,5 +48,6 @@ export interface ContainerComponent extends BaseComponentNode {
 export type ComponentNode = 
 	| TextComponent
   | ClockComponent
-  | ContainerComponent;
+  | ContainerComponent
+  | BarChartComponent;
 
