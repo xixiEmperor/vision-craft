@@ -6,6 +6,7 @@ export type ComponentType =
   | 'Text' 
   | 'Image' 
   | 'Container' 
+  | 'Clock'
   | 'BarChart' 
   | 'LineChart' 
   | 'PieChart';

@@ -1,10 +1,11 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import FormRender, { useForm } from "form-render";
-import type { ComponentNode, TextComponent } from "@/core/schema/basic";
+import type { ComponentNode } from "@/core/schema/basic";
 import type { PageDSL } from "@/core/schema/page";
 import { useSchemaStore } from "@/store/schema-store";
 import { useShallow } from "zustand/shallow";
-import { getTextPropsSchema } from "@/utils/formSchema";
+import { componentDefaultConfigs } from "@/config";
+import { getComponentPropsSchema } from "@/utils/formSchema";
 
 export default function PropertyPanel() {
   const { selectedId, findItem, schema, updateItem } = useSchemaStore(
@@ -18,23 +19,35 @@ export default function PropertyPanel() {
 
   // 根据当前选中的组件 id，获取对应的节点数据
   const selectedNode = useMemo<ComponentNode | PageDSL | null>(() => {
-    if (!selectedId || !schema) return null;
+    if (!selectedId || !schema) {
+      return null;
+    }
     return findItem(selectedId, schema) as ComponentNode | PageDSL | null;
   }, [selectedId, schema, findItem]);
 
-  // Text 组件的 props 表单 schema，在运行时只生成一次
-  const textPropsSchema = useMemo(() => getTextPropsSchema(), []);
-
-  // 为 Text 组件创建 form-render 的 form 实例
-  const textForm = useForm();
-
-  // 当选中的节点变化且为 Text 组件时，将节点的 props 同步到表单初始值
-  useEffect(() => {
-    if (selectedNode && (selectedNode as ComponentNode).type === "Text") {
-      const textNode = selectedNode as TextComponent;
-      textForm.setValues(textNode.props);
+  // 当前选中组件的 props 配置表单 schema（Text、Clock 等共用一套生成逻辑）
+  const componentPropsSchema = useMemo(() => {
+    // 没选就不管
+    if (!selectedNode) {
+      return null;
     }
-  }, [selectedNode, textForm]);
+    // 选的是根容器，也不管
+    if ((selectedNode as PageDSL).type === "RootContainer") {
+      return null;
+    }
+
+    const node = selectedNode as ComponentNode;
+    const defaultConfig = componentDefaultConfigs[node.type as keyof typeof componentDefaultConfigs];
+
+    if (!defaultConfig) {
+      return null;
+    }
+
+    return getComponentPropsSchema(node.type, defaultConfig.props);
+  }, [selectedNode]);
+
+  // 为属性表单创建 form-render 的 form 实例
+  const form = useForm();
 
   // 未选中任何组件时的占位
   if (!selectedNode) {
@@ -47,25 +60,24 @@ export default function PropertyPanel() {
   }
 
   // Text 组件：使用 form-render + 动态生成的 JSON Schema 渲染配置表单
-  if (selectedNode.type === "Text") {
-    const textNode = selectedNode as TextComponent;
-
+  if (componentPropsSchema) {
+    
     return (
-      <div>
-        {/* Text 组件的自动化配置表单（基于 JSON Schema + form-render） */}
         <FormRender
-          form={textForm}
-          schema={textPropsSchema}
-          // 使用 onValuesChange，而不是 onChange，符合 form-render v2 的官方用法
-          onValuesChange={(_, formData) => {
+          className="flex flex-col justify-between items-center p-2 h-full"
+          form={form}
+          schema={componentPropsSchema}
+          footer={true}
+          onMount={() => {
+            form.setValues((selectedNode as ComponentNode).props);
+          }}
+          onFinish={(values) => {
             if (!selectedId) return;
-            // 将表单结果写回全局 schema store，对应当前选中的组件
             updateItem(selectedId, {
-              props: formData,
+              props: values,
             } as Partial<ComponentNode>);
           }}
         />
-      </div>
     );
   }
 

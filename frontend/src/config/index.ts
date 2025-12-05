@@ -1,5 +1,6 @@
 import { textDefaultConfig } from "./text.config";
 import { containerDefaultConfig } from "./container.config";
+import { clockDefaultConfig } from "./clock.config";
 import { smartDeepClone } from "@/utils/deepClone";
 import type { ComponentNode } from "@/core/schema/basic";
 
@@ -8,7 +9,8 @@ import type { ComponentNode } from "@/core/schema/basic";
  */
 export const componentDefaultConfigs = {
   'Text': textDefaultConfig,
-  'Container': containerDefaultConfig
+  'Container': containerDefaultConfig,
+  'Clock': clockDefaultConfig,
 };
 
 export const getNewComponentConfig = (type: keyof typeof componentDefaultConfigs): ComponentNode => {

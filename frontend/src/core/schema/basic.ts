@@ -15,6 +15,21 @@ export interface TextComponent extends BaseComponentNode {
 }
 
 /**
+ * 时钟组件
+ */
+export interface ClockComponent extends BaseComponentNode {
+  type: 'Clock';
+  props: {
+    format: string; // 时间格式，例如：HH:mm:ss
+    fontSize: number; // 字体大小
+    fontWeight: number; // 字体粗细
+    color: string; // 颜色
+    textAlign: 'left' | 'center' | 'right'; // 对齐方式
+    showSeconds?: boolean; // 是否显示秒
+  };
+}
+
+/**
  * 容器组件
  * 核心：拥有 children 属性
  */
@@ -31,5 +46,6 @@ export interface ContainerComponent extends BaseComponentNode {
 // 所有可能的组件类型集合
 export type ComponentNode = 
 	| TextComponent
+  | ClockComponent
   | ContainerComponent;
 

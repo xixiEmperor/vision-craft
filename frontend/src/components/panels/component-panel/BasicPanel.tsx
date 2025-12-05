@@ -1,5 +1,5 @@
 import type React from "react"
-import { AlignJustify, Box } from "lucide-react"
+import { AlignJustify, Box, Clock3, Image } from "lucide-react"
 import DraggableItem from "@/core/dnd/DraggableItem"
 
 interface ComponentItem {
@@ -32,10 +32,14 @@ export default function BasicPanel() {
             icon: <AlignJustify />
         },
         {
-
             type: "Image",
             name: "图片组件",
-            icon: <AlignJustify />
+            icon: <Image />
+        },
+        {
+            type: "Clock",
+            name: "时钟组件",
+            icon: <Clock3 />
         },
         {
             type: "Container",
