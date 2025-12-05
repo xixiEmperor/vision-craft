@@ -41,6 +41,46 @@ export const barChartFieldMeta: Record<
   },
   dataSource: {
     title: "数据源配置",
+    schema: {
+      type: "object",
+      properties: {
+        sourceType: {
+          title: "数据源类型",
+          enum: ["static", "api"],
+          widget: "select",
+        },
+        data: {
+          title: "静态数据",
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              name: {
+                title: "名称",
+                type: "string",
+                placeholder: "如：分类A",
+              },
+              value: {
+                title: "数值",
+                type: "number",
+                widget: "inputNumber",
+              },
+            },
+            required: ["name", "value"],
+          },
+        },
+        apiUrl: {
+          title: "接口地址",
+          type: "string",
+          placeholder: "https://api.example.com/data",
+        },
+        refreshInterval: {
+          title: "刷新间隔(秒)",
+          type: "number",
+          minimum: 0,
+        },
+      },
+    },
   },
 };
 

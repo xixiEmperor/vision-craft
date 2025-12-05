@@ -65,6 +65,11 @@ export const getComponentPropsSchema = (
       if (meta.placeholder) {
         current.placeholder = meta.placeholder;
       }
+
+      // 对于需要自定义/补充的复杂字段（如嵌套对象、数组），允许直接覆盖 schema
+      if (meta.schema && typeof meta.schema === "object") {
+        Object.assign(current, meta.schema);
+      }
     });
   }
 

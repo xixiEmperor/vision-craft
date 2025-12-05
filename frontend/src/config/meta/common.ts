@@ -10,4 +10,5 @@ export interface FieldMeta {
   placeholder?: string;
   minimum?: number;
   maximum?: number;
+  schema?: Record<string, any>; // 用于覆盖或补充自动生成的 Schema
 }
