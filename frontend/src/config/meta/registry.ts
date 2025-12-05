@@ -3,6 +3,8 @@ import type { FieldMeta } from "./common";
 import { textFieldMeta } from "./text.meta";
 import { clockFieldMeta } from "./clock.meta";
 import { barChartFieldMeta } from "./bar-chart.meta";
+import { imageFieldMeta } from "./image.meta";
+import { buttonFieldMeta } from "./button.meta";
 
 /**
  * 组件级元数据注册表
@@ -15,6 +17,8 @@ type ComponentMetaRegistry = Partial<
 
 export const componentMetaRegistry: ComponentMetaRegistry = {
   Text: textFieldMeta,
+  Image: imageFieldMeta,
+  Button: buttonFieldMeta,
   Clock: clockFieldMeta,
   BarChart: barChartFieldMeta,
 };

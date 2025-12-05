@@ -5,6 +5,7 @@ import type { PageDSL } from "./page";
 export type ComponentType = 
   | 'Text' 
   | 'Image' 
+  | 'Button'
   | 'Container' 
   | 'Clock'
   | 'BarChart' 

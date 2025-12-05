@@ -1,5 +1,5 @@
 import type React from "react"
-import { AlignJustify, Box, Clock3, Image } from "lucide-react"
+import { AlignJustify, Box, Clock3, Image, MousePointerClick } from "lucide-react"
 import DraggableItem from "@/core/dnd/DraggableItem"
 
 interface ComponentItem {
@@ -35,6 +35,11 @@ export default function BasicPanel() {
             type: "Image",
             name: "图片组件",
             icon: <Image />
+        },
+        {
+            type: "Button",
+            name: "按钮组件",
+            icon: <MousePointerClick />
         },
         {
             type: "Clock",

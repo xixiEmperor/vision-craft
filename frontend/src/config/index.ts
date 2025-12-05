@@ -2,6 +2,8 @@ import { textDefaultConfig } from "./text.config";
 import { containerDefaultConfig } from "./container.config";
 import { clockDefaultConfig } from "./clock.config";
 import { barChartDefaultConfig } from "./bar-chart.config";
+import { imageDefaultConfig } from "./image.config";
+import { buttonDefaultConfig } from "./button.config";
 import { smartDeepClone } from "@/utils/deepClone";
 import type { ComponentNode } from "@/core/schema/basic";
 
@@ -12,6 +14,8 @@ import type { ComponentNode } from "@/core/schema/basic";
  */
 export const componentDefaultConfigs = {
   Text: textDefaultConfig,
+  Image: imageDefaultConfig,
+  Button: buttonDefaultConfig,
   Container: containerDefaultConfig,
   Clock: clockDefaultConfig,
   BarChart: barChartDefaultConfig,

@@ -4,6 +4,8 @@ import type { ComponentNode } from "@/core/schema/basic";
 import type { PageDSL } from "@/core/schema/page";
 import Container from "./basic/Container";
 import Text from "./basic/Text";
+import Image from "./basic/Image";
+import Button from "./basic/Button";
 import Clock from "./basic/Clock";
 import RootContainer from "./basic/RootContainer";
 import BarChart from "./chart/BarChart";
@@ -71,6 +73,8 @@ class ComponentRegistryManager {
 // 这里通过类型断言把具体组件适配到统一的 RegistryComponent 约定
 ComponentRegistryManager.register("Container", Container as unknown as RegistryComponent);
 ComponentRegistryManager.register("Text", Text as unknown as RegistryComponent);
+ComponentRegistryManager.register("Image", Image as unknown as RegistryComponent);
+ComponentRegistryManager.register("Button", Button as unknown as RegistryComponent);
 ComponentRegistryManager.register("Clock", Clock as unknown as RegistryComponent);
 ComponentRegistryManager.register("BarChart", BarChart as unknown as RegistryComponent);
 ComponentRegistryManager.register("RootContainer", RootContainer as unknown as RegistryComponent); // 根容器组件是一个特殊的容器组件

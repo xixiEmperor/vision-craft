@@ -16,6 +16,34 @@ export interface TextComponent extends BaseComponentNode {
 }
 
 /**
+ * 图片组件
+ */
+export interface ImageComponent extends BaseComponentNode {
+  type: 'Image';
+  props: {
+    src: string; // 图片地址
+    alt?: string; // 备用文案
+    fit: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down'; // 对齐模式
+    preview?: boolean; // 是否启用预览
+  };
+}
+
+/**
+ * 按钮组件
+ */
+export interface ButtonComponent extends BaseComponentNode {
+  type: 'Button';
+  props: {
+    text: string; // 按钮文案
+    type: 'default' | 'primary' | 'dashed' | 'link' | 'text'; // 视觉类型
+    size: 'small' | 'middle' | 'large'; // 尺寸
+    danger?: boolean; // 危险态
+    block?: boolean; // 是否通栏
+    disabled?: boolean; // 是否禁用
+  };
+}
+
+/**
  * 时钟组件
  */
 export interface ClockComponent extends BaseComponentNode {
@@ -47,6 +75,8 @@ export interface ContainerComponent extends BaseComponentNode {
 // 所有可能的组件类型集合
 export type ComponentNode = 
 	| TextComponent
+  | ImageComponent
+  | ButtonComponent
   | ClockComponent
   | ContainerComponent
   | BarChartComponent;
